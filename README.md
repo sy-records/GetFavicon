@@ -13,5 +13,5 @@ GitHub项目地址:[https://github.com/sy-records/GetFavicon](https://github.com
 # 请求示例
 请求地址:[https://api.qq52o.me/favicon/](https://api.qq52o.me/favicon/)  
 请求方式:GET  
-请求参数:get.php?url=XXXXX  
+请求参数:get.php?url=XXXXX    
 参数：XXXXX(需要获取的目标网站网址 例如?url=www.baidu.com 网址前面的http://可以加，也可以不加。但如果是https://头，则必须加上)  
