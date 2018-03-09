@@ -3,7 +3,7 @@
 ***
 演示地址：http://api.qq52o.me/favicon
 ***
-版本:1.0
+版本:1.0  
 作者:[沈唁](https://qq52o.me)  
 作者博客:[https://qq52o.me](https://qq52o.me)  
 开源协议:[GPL v3](https://opensource.org/licenses/GPL-3.0)  
