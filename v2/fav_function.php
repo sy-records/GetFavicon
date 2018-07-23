@@ -41,7 +41,7 @@ function echoFav($path = '', $file = '')
         $file = "null.ico"; //默认的图标
         if (file_exists($file))  $file = file_get_contents($file);
     }
-    if($path != '') file_put_contents($path, $file);   //保存文件
+//    if($path != '') file_put_contents($path, $file);   //保存文件
     die($file);
 }
 
