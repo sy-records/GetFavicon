@@ -116,14 +116,14 @@
     <ul class="demo">
     <li>
         <a href="https://qq52o.me" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=https://qq52o.me/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=https://qq52o.me/" width="16" height="16">
             <em>沈唁志</em>
         </a>
     </li>
     
     <li>
         <a href="http://www.12306.cn/mormhweb/" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=http://www.12306.cn/mormhweb/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=http://www.12306.cn/mormhweb/" width="16" height="16">
             <em>12306</em>
             <!--带有js跳转，首页无法获取-->
         </a>
@@ -131,7 +131,7 @@
     
     <li>
         <a href="http://www.baidu.com" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=http://www.baidu.com/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=http://www.baidu.com/" width="16" height="16">
             <em>百度</em>
             <!--没有ico的标签-->
         </a>
@@ -139,7 +139,7 @@
     
     <li>
         <a href="http://mail.163.com/" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=http://mail.163.com/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=http://mail.163.com/" width="16" height="16">
             <em>网易</em>
             <!--带有gzip压缩-->
         </a>
@@ -147,7 +147,7 @@
     
     <li>
         <a href="https://www.wikipedia.org/" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=https://www.wikipedia.org/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=https://www.wikipedia.org/" width="16" height="16">
             <em>维基百科</em>
             <!--带有相对路径及https跳转-->
         </a>
@@ -155,7 +155,7 @@
     
     <li>
         <a href="http://weibo.com/" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=http://weibo.com/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=http://weibo.com/" width="16" height="16">
             <em>微博</em>
             <!--带有302跳转-->
         </a>
@@ -163,7 +163,7 @@
     
     <li>
         <a href="http://www.itcast.cn/" target="_blank">
-            <img src="https://api.qq52o.me/favicon/get.php?url=http://www.itcast.cn/" width="16" height="16">
+            <img src="http://localhost/GetFavicon/get.php?url=http://www.itcast.cn/" width="16" height="16">
             <em>传智播客</em>
         </a>
     </li>
