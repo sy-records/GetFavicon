@@ -36,12 +36,14 @@ function getFav($url, $path)
  */
 function echoFav($path = '', $file = '')
 {
-    if($file == '')  //没有
-    {
+    if($file == ''){
         $file = "null.ico"; //默认的图标
         if (file_exists($file))  $file = file_get_contents($file);
+        die($file);
     }
-    if($path != '') file_put_contents($path, $file);   //保存文件
+    if($path != ''){
+            file_put_contents($path, $file);//保存文件
+    }
     die($file);
 }
 
