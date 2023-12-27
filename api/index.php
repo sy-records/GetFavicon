@@ -6,9 +6,6 @@ if (empty($url)) {
     exit;
 }
 
-// 获取刷新参数
-$refresh = $_GET['refresh'] ?? 0;
-
 $parsed = parse_url($url);
 $host = $parsed['host'] ?? $parsed['path'];
 $scheme = $parsed['scheme'] ?? 'http';
