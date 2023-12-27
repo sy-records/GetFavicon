@@ -16,7 +16,7 @@ $port = $parsed['port'] ?? '';
 $url = $scheme . '://' . $host . ($port ? ':' . $port : '');
 
 if (!filter_var($url, FILTER_VALIDATE_URL)) {
-    output_image('', $refresh);
+    output_image('');
     exit;
 }
 
@@ -36,30 +36,25 @@ if ($icon) {
         $href = $icon;
     }
 
-    output_image($href, $refresh);
+    output_image($href);
 }
 
-output_image('', $refresh);
+output_image('');
 
-function output_image($url, $refresh)
+function output_image($url)
 {
     header('Content-type: image/x-icon');
+    header('Cache-Control: max-age=86400');
+    header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
 
     if (empty($url)) {
-        $content = file_get_contents(__DIR__ . '/cache/null.ico');
+        $content = '';
     } else {
-        $host = parse_url($url, PHP_URL_HOST);
-        $cache = __DIR__ . '/cache/' . $host . '.ico';
-        if (file_exists($cache) && empty($refresh)) {
-            exit(file_get_contents($cache));
-        }
-
         $content = file_get_contents($url);
-        if (empty($content)) {
-            $content = file_get_contents(__DIR__ . '/cache/null.ico');
-        }
+    }
 
-        file_put_contents($cache, $content);
+    if (empty($content)) {
+        $content = file_get_contents(__DIR__ . '/cache/null.ico');
     }
 
     exit($content);
