@@ -6,6 +6,8 @@ if (empty($url)) {
     exit;
 }
 
+define('TMP_PATH', getenv('VERCEL') ? '/tmp' : __DIR__ . '/cache');
+
 $parsed = parse_url($url);
 $host = $parsed['host'] ?? $parsed['path'];
 $scheme = $parsed['scheme'] ?? 'http';
@@ -13,32 +15,65 @@ $port = $parsed['port'] ?? '';
 $url = $scheme . '://' . $host . ($port ? ':' . $port : '');
 
 if (!filter_var($url, FILTER_VALIDATE_URL)) {
-    output_image('');
-    exit;
+    output_default_image();
 }
+
+check_cache($host);
 
 $icon = get_favorite_icon($url);
-if ($icon) {
-    if (strpos($icon, '//') === 0) {
-        $href = $scheme . ':' . $icon;
-    }
-
-    if (strpos($icon, 'http') === false) {
-        if (strpos($icon, '/') !== 0) {
-            $icon = '/' . $icon;
-        }
-
-        $href = $url . $icon;
-    } else {
-        $href = $icon;
-    }
-
-    output_image($href);
+if (empty($icon)) {
+    output_default_image();
 }
 
-output_image('');
+$iconUrl = $icon;
+if (strpos($icon, '//') === 0) {
+    $iconUrl = $scheme . ':' . $icon;
+}
 
-function output_image($url)
+if (strpos($icon, 'http') === false) {
+    if (strpos($icon, '/') !== 0) {
+        $icon = '/' . $icon;
+    }
+
+    $iconUrl = $url . $icon;
+}
+
+output_image($iconUrl, $host);
+
+function output_default_image()
+{
+    header('Content-type: image/x-icon');
+    $content = file_get_contents(__DIR__ . '/cache/default.ico');
+    exit($content);
+}
+
+function check_cache($host)
+{
+    $refresh = $_GET['refresh'] ?? false;
+    if ($refresh) {
+        return false;
+    }
+
+    $cacheFile = TMP_PATH . '/' . md5($host);
+    if (file_exists($cacheFile)) {
+        $content = file_get_contents($cacheFile);
+        if (!empty($content)) {
+            $fileType = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $content);
+            if ($fileType === 'image/svg+xml') {
+                header('Content-type: image/svg+xml');
+            } else {
+                header('Content-type: image/x-icon');
+            }
+
+            header('X-Icon-Cache: Hit');
+            exit($content);
+        }
+    }
+
+    return false;
+}
+
+function output_image($url, $host)
 {
     $ext = pathinfo($url, PATHINFO_EXTENSION);
     if ($ext === 'svg') {
@@ -47,19 +82,12 @@ function output_image($url)
         header('Content-type: image/x-icon');
     }
 
-    header('Cache-Control: max-age=86400');
-    header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
-
-    if (empty($url)) {
-        $content = '';
-    } else {
-        $content = file_get_contents($url);
-    }
-
+    $content = file_get_contents($url);
     if (empty($content)) {
-        $content = file_get_contents(__DIR__ . '/cache/null.ico');
+        output_default_image();
     }
 
+    file_put_contents(TMP_PATH . '/' . md5($host), $content);
     exit($content);
 }
 
