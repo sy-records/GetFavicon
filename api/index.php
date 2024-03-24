@@ -23,8 +23,8 @@ check_cache($host);
 $icon = get_favorite_icon($url);
 if (empty($icon)) {
     $defaultIcon = $url . '/favicon.ico';
-    $icon = get_url_content($defaultIcon);
-    if (!empty($defaultIcon)) {
+    $exist = get_url_content($defaultIcon, 5, true, true);
+    if ($exist) {
         output_image($defaultIcon, $host);
     }
 
@@ -97,7 +97,7 @@ function output_image($url, $host)
     exit($content);
 }
 
-function get_url_content($url, $timeout = 3, $followRedirects = true)
+function get_url_content($url, $timeout = 3, $followRedirects = true, $checkExists = false)
 {
     $ch = curl_init();
 
@@ -112,7 +112,13 @@ function get_url_content($url, $timeout = 3, $followRedirects = true)
     curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
 
     $output = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
     curl_close($ch);
+
+    if ($checkExists) {
+        return $httpCode == 200;
+    }
 
     return $output;
 }
