@@ -22,6 +22,12 @@ check_cache($host);
 
 $icon = get_favorite_icon($url);
 if (empty($icon)) {
+    $defaultIcon = $url . '/favicon.ico';
+    $icon = get_url_content($defaultIcon);
+    if (!empty($defaultIcon)) {
+        output_image($defaultIcon, $host);
+    }
+
     output_default_image();
 }
 
