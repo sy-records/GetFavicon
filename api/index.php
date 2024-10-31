@@ -92,7 +92,7 @@ function output_image($url, $host)
     $statusLine = $http_response_header[0];
     preg_match('{HTTP\/\S*\s(\d{3})}', $statusLine, $match);
     $statusCode = $match[1] ?? null;
-    if (empty($content) || $statusCode !== '200') {
+    if (empty($content) || (!empty($statusCode) && !in_array($statusCode, [200, 301, 302]))) {
         output_default_image();
     }
 
