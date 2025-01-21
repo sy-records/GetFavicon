@@ -12,6 +12,12 @@ Fork 本项目后，在 Vercel 上导入项目部署即可。
 
 将 `api` 目录设置为根目录，或者将 `index.php` 放置在网站根目录下即可。
 
+### Docker
+
+```bash
+docker run -d --name get-favicon -p 80:80 lufeidot/get-favicon:latest
+```
+
 ## 使用
 
 `https://favicon-ico.vercel.app/?url=域名`
