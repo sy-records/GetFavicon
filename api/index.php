@@ -88,7 +88,14 @@ function output_image($url, $host)
         header('Content-type: image/x-icon');
     }
 
-    $content = @file_get_contents($url);
+    $opts = [
+        'http' => [
+            'method' => 'GET',
+            'header' => 'User-Agent: ' . $_SERVER['HTTP_USER_AGENT']
+        ]
+    ];
+    $context = stream_context_create($opts);
+    $content = @file_get_contents($url, false, $context);
     $statusLine = $http_response_header[0];
     preg_match('{HTTP\/\S*\s(\d{3})}', $statusLine, $match);
     $statusCode = $match[1] ?? null;

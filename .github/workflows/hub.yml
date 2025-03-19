@@ -33,4 +33,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/get-favicon:latest
-            ${{ secrets.DOCKER_USERNAME }}/get-favicon:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/get-favicon:php8.3-apache
